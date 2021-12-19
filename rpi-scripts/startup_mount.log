@@ -1,0 +1,127 @@
+umount: /mnt/DOCK 1: not mounted.
+umount: /mnt/DOCK 2: not mounted.
+umount: /mnt/VERBATIM: not mounted.
+Fri 26 Nov 15:46:55 CET 2021 Unmounted previous volumes
+/home/pi/startup_mount.sh: line 10: e2label: command not found
+Fri 26 Nov 15:46:55 CET 2021 Creating /mnt/
+Fri 26 Nov 15:46:55 CET 2021 Mounting /dev/sda1 in /mnt/
+/home/pi/startup_mount.sh: line 10: e2label: command not found
+Fri 26 Nov 15:46:56 CET 2021 Creating /mnt/
+Fri 26 Nov 15:46:56 CET 2021 Mounting /dev/sdb1 in /mnt/
+/home/pi/startup_mount.sh: line 10: e2label: command not found
+Fri 26 Nov 15:46:57 CET 2021 Creating /mnt/
+Fri 26 Nov 15:46:57 CET 2021 Mounting /dev/sdc1 in /mnt/
+umount: /mnt/DOCK 1: not mounted.
+umount: /mnt/DOCK 2: not mounted.
+umount: /mnt/VERBATIM: not mounted.
+Fri 26 Nov 15:54:07 CET 2021 Unmounted previous volumes
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sda1
+Fri 26 Nov 15:54:08 CET 2021 Creating /mnt/DOCK 2
+Fri 26 Nov 15:54:08 CET 2021 Mounting /dev/sda1 in /mnt/DOCK 2
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdb1
+Fri 26 Nov 15:54:09 CET 2021 Creating /mnt/DOCK 1
+Fri 26 Nov 15:54:09 CET 2021 Mounting /dev/sdb1 in /mnt/DOCK 1
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdc1
+Fri 26 Nov 15:54:10 CET 2021 Creating /mnt/VERBATIM
+Fri 26 Nov 15:54:11 CET 2021 Mounting /dev/sdc1 in /mnt/VERBATIM
+umount: /mnt/DOCK 1: not mounted.
+umount: /mnt/DOCK 2: not mounted.
+umount: /mnt/VERBATIM: not mounted.
+Fri 26 Nov 23:23:19 CET 2021 Unmounted previous volumes
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sda1
+Fri 26 Nov 23:23:19 CET 2021 Creating /mnt/DOCK 2
+Fri 26 Nov 23:23:19 CET 2021 Mounting /dev/sda1 in /mnt/DOCK 2
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdb1
+Fri 26 Nov 23:23:20 CET 2021 Creating /mnt/DOCK 1
+Fri 26 Nov 23:23:20 CET 2021 Mounting /dev/sdb1 in /mnt/DOCK 1
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdc1
+Fri 26 Nov 23:23:21 CET 2021 Creating /mnt/VERBATIM
+Fri 26 Nov 23:23:21 CET 2021 Mounting /dev/sdc1 in /mnt/VERBATIM
+umount: /mnt/DOCK 1: not mounted.
+umount: /mnt/DOCK 2: not mounted.
+umount: /mnt/VERBATIM: not mounted.
+Sat 27 Nov 18:57:29 CET 2021 Unmounted previous volumes
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sda1
+Sat 27 Nov 18:57:30 CET 2021 Creating /mnt/DOCK 2
+Sat 27 Nov 18:57:30 CET 2021 Mounting /dev/sda1 in /mnt/DOCK 2
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdb1
+Sat 27 Nov 18:57:31 CET 2021 Creating /mnt/DOCK 1
+Sat 27 Nov 18:57:31 CET 2021 Mounting /dev/sdb1 in /mnt/DOCK 1
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdc1
+Sat 27 Nov 18:57:32 CET 2021 Creating /mnt/VERBATIM
+Sat 27 Nov 18:57:32 CET 2021 Mounting /dev/sdc1 in /mnt/VERBATIM
+umount: /mnt/DOCK 1: not mounted.
+umount: /mnt/DOCK 2: not mounted.
+umount: /mnt/VERBATIM: not mounted.
+Mon 29 Nov 23:17:06 CET 2021 Unmounted previous volumes
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sda1
+Mon 29 Nov 23:17:07 CET 2021 Creating /mnt/DOCK 2
+Mon 29 Nov 23:17:07 CET 2021 Mounting /dev/sda1 in /mnt/DOCK 2
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdb1
+Mon 29 Nov 23:17:08 CET 2021 Creating /mnt/DOCK 1
+Mon 29 Nov 23:17:08 CET 2021 Mounting /dev/sdb1 in /mnt/DOCK 1
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdc1
+Mon 29 Nov 23:17:09 CET 2021 Creating /mnt/VERBATIM
+Mon 29 Nov 23:17:09 CET 2021 Mounting /dev/sdc1 in /mnt/VERBATIM
+umount: /mnt/DOCK 1: not mounted.
+umount: /mnt/DOCK 2: not mounted.
+umount: /mnt/VERBATIM: not mounted.
+Thu  2 Dec 20:41:28 CET 2021 Unmounted previous volumes
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sda1
+Thu  2 Dec 20:41:29 CET 2021 Creating /mnt/DOCK 2
+Thu  2 Dec 20:41:29 CET 2021 Mounting /dev/sda1 in /mnt/DOCK 2
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdb1
+Thu  2 Dec 20:41:30 CET 2021 Creating /mnt/DOCK 1
+Thu  2 Dec 20:41:30 CET 2021 Mounting /dev/sdb1 in /mnt/DOCK 1
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdc1
+Thu  2 Dec 20:41:31 CET 2021 Creating /mnt/VERBATIM
+Thu  2 Dec 20:41:31 CET 2021 Mounting /dev/sdc1 in /mnt/VERBATIM
+umount: /mnt/DOCK 1: not mounted.
+umount: /mnt/DOCK 2: not mounted.
+umount: /mnt/VERBATIM: not mounted.
+Thu  2 Dec 23:00:01 CET 2021 Unmounted previous volumes
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sda1
+Thu  2 Dec 23:00:01 CET 2021 Creating /mnt/DOCK 2
+Thu  2 Dec 23:00:02 CET 2021 Mounting /dev/sda1 in /mnt/DOCK 2
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdb1
+Thu  2 Dec 23:00:03 CET 2021 Creating /mnt/DOCK 1
+Thu  2 Dec 23:00:03 CET 2021 Mounting /dev/sdb1 in /mnt/DOCK 1
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdc1
+Thu  2 Dec 23:00:04 CET 2021 Creating /mnt/VERBATIM
+Thu  2 Dec 23:00:04 CET 2021 Mounting /dev/sdc1 in /mnt/VERBATIM
+umount: /mnt/DOCK 1: not mounted.
+umount: /mnt/DOCK 2: not mounted.
+umount: /mnt/VERBATIM: not mounted.
+Sun  5 Dec 23:37:24 CET 2021 Unmounted previous volumes
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sda1
+Sun  5 Dec 23:37:24 CET 2021 Creating /mnt/DOCK 2
+Sun  5 Dec 23:37:24 CET 2021 Mounting /dev/sda1 in /mnt/DOCK 2
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdb1
+Sun  5 Dec 23:37:26 CET 2021 Creating /mnt/DOCK 1
+Sun  5 Dec 23:37:26 CET 2021 Mounting /dev/sdb1 in /mnt/DOCK 1
+umount: /mnt/DOCK 1: not mounted.
+umount: /mnt/DOCK 2: not mounted.
+umount: /mnt/VERBATIM: not mounted.
+Mon 13 Dec 22:54:19 CET 2021 Unmounted previous volumes
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sda1
+Mon 13 Dec 22:54:19 CET 2021 Creating /mnt/DOCK 2
+Mon 13 Dec 22:54:19 CET 2021 Mounting /dev/sda1 in /mnt/DOCK 2
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdb1
+Mon 13 Dec 22:54:20 CET 2021 Creating /mnt/DOCK 1
+Mon 13 Dec 22:54:20 CET 2021 Mounting /dev/sdb1 in /mnt/DOCK 1
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdc1
+Mon 13 Dec 22:54:21 CET 2021 Creating /mnt/VERBATIM
+Mon 13 Dec 22:54:21 CET 2021 Mounting /dev/sdc1 in /mnt/VERBATIM
+umount: /mnt/DOCK 1: not mounted.
+umount: /mnt/DOCK 2: not mounted.
+umount: /mnt/VERBATIM: not mounted.
+Tue 14 Dec 22:11:42 CET 2021 Unmounted previous volumes
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sda1
+Tue 14 Dec 22:11:43 CET 2021 Creating /mnt/DOCK 2
+Tue 14 Dec 22:11:43 CET 2021 Mounting /dev/sda1 in /mnt/DOCK 2
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdb1
+Tue 14 Dec 22:11:44 CET 2021 Creating /mnt/DOCK 1
+Tue 14 Dec 22:11:44 CET 2021 Mounting /dev/sdb1 in /mnt/DOCK 1
+/usr/sbin/e2label: Bad magic number in super-block while trying to open /dev/sdc1
+Tue 14 Dec 22:11:45 CET 2021 Creating /mnt/VERBATIM
+Tue 14 Dec 22:11:45 CET 2021 Mounting /dev/sdc1 in /mnt/VERBATIM

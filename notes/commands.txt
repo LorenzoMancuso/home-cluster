@@ -1,0 +1,3 @@
+lsblk	list all disks info with mountpoints
+blkid	list all disks with UUID, PARTID and Labels
+df -h	lsit all partitions with free space info
