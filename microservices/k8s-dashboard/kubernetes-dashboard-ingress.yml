@@ -3,10 +3,7 @@ kind: Ingress
 metadata:
   name: kubernetes-dashboard-ingress
   namespace: kubernetes-dashboard
-  annotations:
-    kubernetes.io/ingress.class: "traefik"
-    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
-    traefik.ingress.kubernetes.io/ssl-redirect: "true"
+
 spec:
   rules:
   - http:

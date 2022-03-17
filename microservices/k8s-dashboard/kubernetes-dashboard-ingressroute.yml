@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kubernetes-dashboard-ingressroute
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Path(`/kubernetes`)
+      kind: Rule
+      priority: 10
+      services:
+        # This IngressRoute will be never called due to the redirect middleware
+        - name: kubernetes-dashboard
+          namespace: kubernetes-dashboard
+          port: 443
+      #middlewares:
+        #- name: https-redirect
+
