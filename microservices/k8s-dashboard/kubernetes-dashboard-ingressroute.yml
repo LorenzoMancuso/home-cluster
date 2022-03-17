@@ -12,7 +12,6 @@ spec:
       services:
         # This IngressRoute will be never called due to the redirect middleware
         - name: kubernetes-dashboard
-          namespace: kubernetes-dashboard
           port: 443
       #middlewares:
         #- name: https-redirect
