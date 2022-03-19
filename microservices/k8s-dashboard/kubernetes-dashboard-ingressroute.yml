@@ -3,6 +3,7 @@ kind: IngressRoute
 metadata:
   name: kubernetes-dashboard-ingressroute
   namespace: kubernetes-dashboard
+
 spec:
   entryPoints:
     - websecure
