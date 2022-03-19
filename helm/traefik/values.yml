@@ -146,9 +146,11 @@ providers:
 # - "--ping"
 # - "--ping.entrypoint=web"
 additionalArguments:
-  - --api.insecure=true
-  - --serversTransport.insecureSkipVerify=true
-  - --log.level=debug
+  - "--api.dashboard=true"
+  - "--providers.kubernetesingress.ingressclass=traefik-internal"
+  - "--serversTransport.insecureSkipVerify=true"
+  - "--log.level=DEBUG"
+
 volumes: []
 # - name: public-cert
 #   mountPath: "/certs"
