@@ -1,4 +1,4 @@
- apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: whoami
@@ -10,8 +10,5 @@ spec:
       kind: Rule
       priority: 10
       services:
-        # This IngressRoute will be never called due to the redirect middleware
         - name: whoami
-          port: 80
-      #middlewares:
-        #- name: https-redirect
+          port: 8080
