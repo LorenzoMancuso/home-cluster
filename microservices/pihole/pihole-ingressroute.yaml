@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Path(`/pihole`)
+    - match: PathPrefix(`/pihole`) || PathPrefix(`/admin`)
       kind: Rule
       priority: 10
       services:
