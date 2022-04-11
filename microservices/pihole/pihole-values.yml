@@ -57,7 +57,7 @@ serviceDns:
 
   # -- Annotations for the DNS service
   annotations:
-    metallb.universe.tf/allow-shared-ip: pihole-svc
+    # metallb.universe.tf/allow-shared-ip: pihole-svc
     # metallb.universe.tf/address-pool: network-services
 
 # -- Configuration for the DHCP service on port 67
@@ -198,7 +198,8 @@ persistentVolumeClaim:
 
   ## subPath: "pihole"
 
-nodeSelector: {}
+nodeSelector:
+  node-role.kubernetes.io/master: "true"
 
 tolerations: []
 
