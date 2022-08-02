@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Path(`/whoami`)
+    - match: Host(`whoami.mancuso.services`)
       kind: Rule
       priority: 10
       services:
