@@ -16,4 +16,4 @@ spec:
           namespace: kubernetes-dashboard
           port: 443
   tls:
-    - secretName: kubernetes-dashboard-certs
+    secretName: kubernetes-dashboard-certs

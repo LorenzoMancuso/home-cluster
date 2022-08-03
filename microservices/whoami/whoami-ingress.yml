@@ -4,11 +4,12 @@ metadata:
   name: whoami
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
-    - match: Host(`whoami.mancuso.services`)
-      kind: Rule
-      priority: 10
+    - kind: Rule
+      match: Host(`whoami.mancuso.services`) || Path(`/whoami`)
       services:
         - name: whoami
           port: 80
+  tls:
+    secretName: whoami-secret

@@ -8,6 +8,15 @@ helm upgrade --install traefik traefik/traefik --namespace traefik --values valu
 
 kubectl apply -f dashboard.yml
 
+## create openssl self signed cert
+openssl req  -nodes -new -x509  -keyout server.key -out server.crt -config openssl.conf -days 365
+
+## create secret with cert
+kubectl create secret generic mancuso-services-cert-secret --from-file=tls.crt=./server.crt --from-file=tls.key=./server.key
+
+## set cert as default
+
+
 # Access
 
 ## Port-forward
