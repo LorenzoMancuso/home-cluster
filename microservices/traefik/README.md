@@ -4,7 +4,8 @@ https://artifacthub.io/packages/helm/traefik/traefik
 
 helm repo add traefik https://helm.traefik.io/traefik
 helm repo update
-helm upgrade --install traefik traefik/traefik --namespace traefik --values values.yml
+// helm upgrade --install traefik traefik/traefik --namespace traefik --values values.yml
+helm upgrade --install traefik traefik/traefik --values values.yml
 
 kubectl apply -f dashboard.yml
 
