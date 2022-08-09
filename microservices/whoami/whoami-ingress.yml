@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: whoami
+  name: whoami-https
 spec:
   entryPoints:
     - websecure
@@ -12,3 +12,22 @@ spec:
         - name: whoami
           port: 80
   tls: {}
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: whoami-http
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`whoami.mancuso.services`) || Path(`/whoami`)
+      services:
+        - name: whoami
+          port: 80
+      middlewares:
+        - name: redirect-https
+  
