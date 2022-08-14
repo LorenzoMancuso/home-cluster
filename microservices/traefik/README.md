@@ -17,6 +17,13 @@ kubectl create secret generic mancuso-services-cert-secret --from-file=tls.crt=.
 
 ## set cert as default
 
+# SSO
+## create SSO secret
+kubectl create secret generic traefik-sso \
+--from-literal=clientid=XXX.apps.googleusercontent.com \
+--from-literal=clientsecret=XXX \
+--from-literal=secret=SomEtHingRandom
+
 
 # Access
 
@@ -26,4 +33,3 @@ kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traef
 then go to: http://localhost:9000/dashboard/
 **Attention:** the last slash is mandatory
 
-## Ingress
