@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: traefik-dashboard-web
+  name: traefik-dashboard-web-https
 spec:
   entryPoints:
     - websecure
@@ -11,4 +11,27 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
+      middlewares:
+        - name: sso
+          namespace: default
   tls: {}
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard-web-http
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`traefik.mancuso.services`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: api@internal
+          kind: TraefikService
+      middlewares:
+        - name: redirect-https
+          namespace: default
