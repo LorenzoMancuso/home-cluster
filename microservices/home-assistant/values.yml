@@ -10,9 +10,9 @@ image:
   repository: ghcr.io/home-assistant/home-assistant
   # -- image tag
   # @default -- chart.appVersion
-  tag:
+  tag: 2022.9.2@sha256:574c5dc6b1e712267455a0ebcbc84ed2c21fd48c5a9ab7d84f696d8ae01f123e
   # -- image pull policy
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 # -- environment variables.
 # @default -- See below
