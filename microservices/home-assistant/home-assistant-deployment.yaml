@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: home-assistant
+  name: home-assistant
+  namespace: home-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: home-assistant
+  template:
+    metadata:
+      labels:
+        app: home-assistant
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/master: "true"
+      volumes:
+        - name: ha-pv-storage
+          persistentVolumeClaim:
+            claimName: home-assistant
+      containers:
+        - image: ghcr.io/home-assistant/home-assistant:stable
+          name: home-assistant
+          volumeMounts:
+            - mountPath: "/config"
+              name: ha-pv-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: home-assistant
+  namespace: home-assistant
+spec:
+  selector:
+    app: home-assistant
+  ports:
+    - protocol: TCP
+      port: 8123
+      name: http
