@@ -2,18 +2,19 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: home-assistant-https
+  namespace: home-assistant
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`home.mancuso.services`) || Path(`/home`)
+    - match: Host(`home.mancuso.services`)
       kind: Rule
       services:
         - name: home-assistant
           port: 8123
-      #middlewares:
-      #  - name: sso
-      #    namespace: default
+      middlewares:
+        - name: sso
+          namespace: default
   tls: {}
 
 ---
@@ -22,11 +23,12 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: home-assistant-http
+  namespace: home-assistant
 spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`home.mancuso.services`) || Path(`/home`)
+    - match: Host(`home.mancuso.services`)
       kind: Rule
       priority: 10
       services:
