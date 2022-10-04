@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: "zigbee2mqtt-data"
+  namespace: "home-assistant"
+  labels:
+    type: "local"
+spec:
+  storageClassName: "manual"
+  capacity:
+    storage: "600Mi"
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/ssd/zigbee2mqtt"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: zigbee2mqtt
+  name: zigbee2mqtt-data
+  namespace: "home-assistant"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200Mi

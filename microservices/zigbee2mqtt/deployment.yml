@@ -1,0 +1,84 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: zigbee2mqtt
+  name: zigbee2mqtt
+  namespace: "home-assistant"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zigbee2mqtt
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: zigbee2mqtt
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/master: "true"
+      containers:
+        - name: zigbee2mqtt
+          image: koenkk/zigbee2mqtt:latest
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+          env:
+            - name: TZ
+              value: Europe/Rome
+            - name: "ZIGBEE2MQTT_DATA"
+              value: "/data"
+          securityContext:
+            privileged: true
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: zigbee2mqtt-data
+              mountPath: /data
+            - name: zigbee2mqtt-config
+              mountPath: /app/configuration.yaml
+              subPath: configuration.yaml
+            - name: zigbee2mqtt-udev
+              mountPath: /run/udev
+            - name: zigbee-dongle
+              mountPath: /dev/ttyACM0
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 0
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
+      volumes:
+        - name: zigbee2mqtt-data
+          persistentVolumeClaim:
+            claimName: zigbee2mqtt-data
+        - name: zigbee2mqtt-udev
+          hostPath:
+            path: /run/udev
+        - name: zigbee-dongle
+          hostPath:
+            path: /dev/ttyACM0
+        - name: zigbee2mqtt-config
+          configMap:
+            name: zigbee2mqtt-config

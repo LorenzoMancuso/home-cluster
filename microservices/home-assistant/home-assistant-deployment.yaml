@@ -21,19 +21,12 @@ spec:
         - name: ha-pv-storage
           persistentVolumeClaim:
             claimName: home-assistant
-        - name: zigbee-dongle
-          hostPath:
-            path: /dev/ttyACM0
       containers:
         - image: ghcr.io/home-assistant/home-assistant:stable
           name: home-assistant
-          securityContext:
-            privileged: true
           volumeMounts:
             - mountPath: "/config"
               name: ha-pv-storage
-            - mountPath: /dev/ttyACM0
-              name: zigbee-dongle
 ---
 apiVersion: v1
 kind: Service
