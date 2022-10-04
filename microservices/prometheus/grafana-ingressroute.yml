@@ -1,0 +1,39 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-https
+  namespace: prometheus
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`grafana.mancuso.services`)
+      kind: Rule
+      services:
+        - name: kube-prometheus-grafana
+          port: 80
+      middlewares:
+        - name: sso
+          namespace: default
+  tls: {}
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-http
+  namespace: prometheus
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`grafana.mancuso.services`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: kube-prometheus-grafana
+          port: 80
+      middlewares:
+        - name: redirect-https
+          namespace: default
