@@ -1,0 +1,39 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: zigbee2mqtt-https
+  namespace: home-assistant
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`zigbee.mancuso.services`)
+      kind: Rule
+      services:
+        - name: zigbee2mqtt
+          port: 8080
+      middlewares:
+        - name: sso
+          namespace: default
+  tls: {}
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: zigbee2mqtt-http
+  namespace: home-assistant
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`zigbee.mancuso.services`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: zigbee2mqtt
+          port: 8080
+      middlewares:
+        - name: redirect-https
+          namespace: default
