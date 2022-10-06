@@ -35,5 +35,5 @@ data:
       - file
 
     ## Map devices to persistent /data directory
-    devices: /data/devices.yaml
-    groups: /data/groups.yaml
+    devices: devices.yaml
+    groups: groups.yaml
