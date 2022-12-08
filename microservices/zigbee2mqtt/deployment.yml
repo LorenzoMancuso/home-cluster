@@ -23,7 +23,7 @@ spec:
         node-role.kubernetes.io/master: "true"
       containers:
         - name: zigbee2mqtt
-          image: koenkk/zigbee2mqtt:latest
+          image: koenkk/zigbee2mqtt:1.28.0
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
