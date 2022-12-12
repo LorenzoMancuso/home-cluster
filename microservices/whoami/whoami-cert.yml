@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: whoami.mancuso.services
+  #namespace: cert-manager
+spec:
+  secretName: whoami.mancuso.services-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: whoami.mancuso.services
+  dnsNames:
+  - whoami.mancuso.services

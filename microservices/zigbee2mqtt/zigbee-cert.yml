@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: zigbee.mancuso.services
+  #namespace: cert-manager
+spec:
+  secretName: zigbee.mancuso.services-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: zigbee.mancuso.services
+  dnsNames:
+  - zigbee.mancuso.services

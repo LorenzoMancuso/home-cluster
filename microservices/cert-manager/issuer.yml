@@ -11,8 +11,7 @@ spec:
     email: mancusolorenzo95@gmail.com
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
-      name: cert-manager-letsencrypt-issuer
-      key: private-key
+      name: letsencrypt-prod
     # Enable the HTTP-01 challenge provider
     solvers:
     - http01:

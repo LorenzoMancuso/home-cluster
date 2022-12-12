@@ -11,7 +11,8 @@ spec:
       services:
         - name: whoami
           port: 80
-  tls: {}
+  tls:
+    secretName: whoami.mancuso.services-tls
 
 ---
 

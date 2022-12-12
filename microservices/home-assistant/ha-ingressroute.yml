@@ -15,7 +15,8 @@ spec:
       middlewares:
         - name: sso
           namespace: default
-  tls: {}
+  tls:
+    secretName: home.mancuso.services-tls
 
 ---
 

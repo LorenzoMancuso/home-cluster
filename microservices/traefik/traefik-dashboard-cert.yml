@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: traefik.mancuso.services
+  #namespace: cert-manager
+spec:
+  secretName: traefik.mancuso.services-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: traefik.mancuso.services
+  dnsNames:
+  - traefik.mancuso.services
