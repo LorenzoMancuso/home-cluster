@@ -1,0 +1,34 @@
+# install python on all nodes
+- hosts: all
+  become: true
+  gather_facts: false
+  pre_tasks:
+  - name: Install python2 for Ansible
+    raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
+    register: output
+    changed_when: output.stdout != ""
+ 
+# Retrieve the server token and place it in admin's home (/home/admin)
+- hosts: all
+  remote_user: admin
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: fetch the server token
+      fetch:
+        src: /var/lib/rancher/k3s/server/node-token
+        dest: "{{ ansible_env.HOME }}/node-token"
+        flat: yes
+      when: inventory_hostname in groups.servers
+      run_once: yes 
+ 
+- hosts: nodes
+  remote_user: admin
+  tasks:
+    - set_fact:
+        k3s_url: "https://{{ hostvars[groups['servers'][0]]['ansible_default_ipv4']['address'] }}:6443"
+        k3s_token: "{{ lookup('file','/home/admin/node-token')  }}"
+    - name: install k3s on nodes
+      shell: "curl -sfL https://get.k3s.io | K3S_URL={{ k3s_url }} K3S_TOKEN={{ k3s_token }} sh -"
+      args:
+        warn: no
