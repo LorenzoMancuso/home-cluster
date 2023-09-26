@@ -1,13 +1,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: mancuso.services
-  namespace: cert-manager
+  name: k8s.mancuso.services
 spec:
-  secretName: mancuso.services-tls
+  secretName: k8s.mancuso.services-tls
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
-  commonName: mancuso.services
+  commonName: k8s.mancuso.services
   dnsNames:
-  - "*.mancuso.services"
+  - k8s.mancuso.services

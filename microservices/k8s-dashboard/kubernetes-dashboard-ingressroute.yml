@@ -2,7 +2,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: ServersTransport
 metadata:
   name: skip-verify-transport
-  namespace: kubernetes-dashboard
 spec:
   serverName: "k8s.mancuso.services"
   insecureSkipVerify: true
@@ -13,7 +12,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: web-https
-  namespace: kubernetes-dashboard
 
 spec:
   entryPoints:
@@ -24,13 +22,13 @@ spec:
       priority: 10
       services:
         - name: kubernetes-dashboard
-          namespace: kubernetes-dashboard
           port: 443
           serversTransport: skip-verify-transport
       middlewares:
         - name: sso
           namespace: default
-  tls: {}
+  tls:
+    secretName: k8s.mancuso.services-tls
 
 ---
 
@@ -38,7 +36,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: web-http
-  namespace: kubernetes-dashboard
 spec:
   entryPoints:
     - web
@@ -48,7 +45,6 @@ spec:
       priority: 10
       services:
         - name: kubernetes-dashboard
-          namespace: kubernetes-dashboard
           port: 443
       middlewares:
         - name: redirect-https

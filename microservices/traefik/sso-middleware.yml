@@ -72,6 +72,8 @@ spec:
     authResponseHeaders: 
         - "X-Forwarded-User"
     trustForwardHeader: true
+    #tls:
+    #  insecureSkipVerify: true
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -89,4 +91,5 @@ spec:
     middlewares:
       - name: sso
         namespace: default
-  tls: {}
+  tls:
+    secretName: auth.mancuso.services-tls
