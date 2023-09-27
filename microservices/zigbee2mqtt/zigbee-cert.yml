@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: zigbee.mancuso.services
-  #namespace: cert-manager
+  namespace: home-assistant
 spec:
   secretName: zigbee.mancuso.services-tls
   issuerRef:

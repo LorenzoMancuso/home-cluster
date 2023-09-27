@@ -23,15 +23,13 @@ spec:
         node-role.kubernetes.io/master: "true"
       containers:
         - name: zigbee2mqtt
-          image: koenkk/zigbee2mqtt:1.28.4
+          image: koenkk/zigbee2mqtt:1.33.0
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
           env:
             - name: TZ
               value: Europe/Rome
-            #- name: "ZIGBEE2MQTT_DATA"
-            #  value: "/data"
           securityContext:
             privileged: true
           ports:
@@ -42,7 +40,7 @@ spec:
             - name: zigbee2mqtt-data
               mountPath: /app/data
             - name: zigbee2mqtt-config
-              mountPath: /app/configuration.yaml
+              mountPath: /app/data/configuration.yaml
               subPath: configuration.yaml
             - name: zigbee2mqtt-udev
               mountPath: /run/udev

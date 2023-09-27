@@ -20,9 +20,10 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app: zigbee2mqtt
-  name: zigbee2mqtt-data
+  name: "zigbee2mqtt-data"
   namespace: "home-assistant"
 spec:
+  storageClassName: "manual"
   accessModes:
     - ReadWriteOnce
   resources:
