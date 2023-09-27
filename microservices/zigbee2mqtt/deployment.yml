@@ -19,8 +19,20 @@ spec:
       labels:
         app: zigbee2mqtt
     spec:
-      nodeSelector:
-        node-role.kubernetes.io/master: "true"
+      tolerations:
+      - key: "nodeType"
+        operator: "Equal"
+        value: "core"
+        effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                  - raspberrypi-master
       containers:
         - name: zigbee2mqtt
           image: koenkk/zigbee2mqtt:1.33.0

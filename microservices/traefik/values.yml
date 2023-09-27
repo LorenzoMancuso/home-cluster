@@ -468,7 +468,11 @@ affinity: {}
 nodeSelector:
   node-role.kubernetes.io/master: "true"
 
-tolerations: []
+tolerations:
+- key: "nodeType"
+  operator: "Equal"
+  value: "core"
+  effect: "NoSchedule"
 
 # Pods can have priority.
 # Priority indicates the importance of a Pod relative to other Pods.
