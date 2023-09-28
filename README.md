@@ -26,6 +26,11 @@ tolerations:
   effect: "NoSchedule"
 ```
 
+For k3s you have to update the coredns template:
+```
+sudo nano /var/lib/rancher/k3s/server/manifests/coredns.yaml
+```
+
 ## affinity
 
 Examples of node affinities:
