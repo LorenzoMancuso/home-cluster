@@ -1,0 +1,48 @@
+env:
+  # -- Set the container timezone
+  TZ: UTC
+
+service:
+  main:
+    primary: true
+    ports:
+      http:
+        port: 32400
+  dnla-tcp:
+    enabled: false
+    type: NodePort
+    ports:
+      dnla-tcp:
+        enabled: true
+        port: 32469
+        protocol: TCP
+        targetPort: 32469
+    externalTrafficPolicy: Local
+  dnla-udp:
+    enabled: false
+    type: NodePort
+    ports:
+      dnla-udp:
+        enabled: true
+        port: 1900
+        protocol: TCP
+        targetPort: 1900
+    externalTrafficPolicy: Local
+
+# -- Enable devices to be discoverable
+hostNetwork: false
+
+persistence:
+  config:
+    enabled: true
+    mountPath: /config
+
+  custom:
+    enabled: true
+    mountPath: /library
+    accessModes:
+    - ReadOnlyMany
+
+  transcode:
+    enabled: false
+    mountPath: /transcode

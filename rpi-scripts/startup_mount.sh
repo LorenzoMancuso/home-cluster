@@ -8,7 +8,8 @@ echo "$(date) Unmounted previous volumes"
 
 for i in ${!DISKS[@]}; do
 	DISK_LABEL=$(/usr/sbin/e2label "/dev/${DISKS[i]}" | grep -oP "\'\K[^\']+")
-	DIR_NAME=/mnt/"$DISK_LABEL"
+	echo "$(date) Disk label: $DISK_LABEL"
+	DIR_NAME=$(echo /mnt/"$DISK_LABEL" | tr '[:upper:]' '[:lower:]' | tr -d '[:space:]')
 	echo "$(date) Creating $DIR_NAME"
 	
 	mkdir -p "$DIR_NAME"

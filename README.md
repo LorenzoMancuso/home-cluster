@@ -68,3 +68,20 @@ affinity:
           values:
           - core
 ```
+
+## mount disks
+
+To run a script on startup using cron, you will need to do the following −
+
+- Open a terminal and type "crontab -e" to open the cron table for editing.
+
+- Add a new line at the bottom of the file in the following format:
+
+  `@reboot /path/to/script arg1 arg2`
+  This line tells cron to run the script located at "/path/to/script" with arguments "arg1" and "arg2" when the system reboots.
+
+- Save and exit the cron table.
+
+- Verify that the script is correctly added by typing `crontab -l` in the terminal.
+
+- Restart your system to test that the script is being run on startup
