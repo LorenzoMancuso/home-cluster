@@ -15,8 +15,8 @@ spec:
       labels:
         app: home-assistant
     spec:
-      # nodeSelector:
-      #   node-role.kubernetes.io/master: "true"
+      nodeSelector:
+        node-role.kubernetes.io/master: "true"
       tolerations:
       - key: "nodeType"
         operator: "Equal"
