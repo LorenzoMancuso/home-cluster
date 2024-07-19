@@ -24,6 +24,7 @@ metadata:
   namespace: "home-assistant"
 spec:
   storageClassName: "manual"
+  volumeName: zigbee2mqtt-data
   accessModes:
     - ReadWriteOnce
   resources:

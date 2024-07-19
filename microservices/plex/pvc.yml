@@ -23,6 +23,7 @@ metadata:
   name: "plex-config"
 spec:
   storageClassName: "manual"
+  volumeName: plex-config
   accessModes:
     - ReadWriteOnce
   resources:
@@ -56,6 +57,7 @@ metadata:
   name: "plex-data"
 spec:
   storageClassName: "manual"
+  volumeName: plex-data
   accessModes:
     - ReadWriteOnce
   resources:

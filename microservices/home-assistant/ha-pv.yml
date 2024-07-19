@@ -22,6 +22,7 @@ metadata:
   name: "home-assistant"
 spec:
   storageClassName: "manual"
+  volumeName: home-assistant
   accessModes:
     - ReadWriteOnce
   resources:

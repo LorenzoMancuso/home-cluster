@@ -21,6 +21,7 @@ metadata:
   name: "pihole"
 spec:
   storageClassName: "manual"
+  volumeName: pihole
   accessModes:
     - ReadWriteOnce
   resources:
