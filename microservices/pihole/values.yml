@@ -102,7 +102,7 @@ serviceWeb:
     port: 443
 
   # -- `spec.type` for the web interface Service
-  type: ClusterIP
+  type: NodePort
 
   # -- `spec.externalTrafficPolicy` for the web interface Service
   externalTrafficPolicy: Local

@@ -7,7 +7,7 @@ metadata:
 spec:
   storageClassName: "manual"
   capacity:
-    storage: "600Mi"
+    storage: "200Mi"
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -18,14 +18,11 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  labels:
-    app: qbittorrent
-  name: "qbittorrent-config"
+  name: qbittorrent-config
+  namespace: default
 spec:
-  storageClassName: "manual"
-  volumeName: qbittorrent-config
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 200Mi
+      storage: "200Mi"
