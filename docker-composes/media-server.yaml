@@ -1,0 +1,54 @@
+version: "3"
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent
+    container_name: qbittorrent
+    volumes:
+      - /mnt/dock2:/downloads
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
+  plex:
+    image: lscr.io/linuxserver/plex
+    container_name: plex
+    volumes:
+      - /mnt/dock2:/library:ro
+    ports:
+      - 32400:32400
+    restart: unless-stopped
+
+  # sonarr:
+  #   image: lscr.io/linuxserver/sonarr
+  #   container_name: sonarr
+  #   volumes:
+  #     - /mnt/media:/library
+  #   ports:
+  #     - 8989:8989
+  #   restart: unless-stopped
+
+  netdata:
+    image: netdata/netdata
+    container_name: netdata
+    hostname: "raspberry-collector"
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+      - NET_ADMIN
+    volumes:
+      - /mnt/ssd/netdataconfig:/etc/netdata
+      - /mnt/ssd/netdatalib:/var/lib/netdata
+      - /mnt/ssd/netdatacache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+    environment:
+      - NETDATA_CLOUD_REGISTRY=1
+      - NETDATA_REGISTRY_FROM="http://192.168.88.10:19999"  # Indica il master
+
+# volumes:
+#   netdataconfig:
+#   netdatalib:
+#   netdatacache:

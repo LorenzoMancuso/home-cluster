@@ -1,0 +1,81 @@
+version: "3.8"
+
+services:
+  homeassistant:
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    container_name: homeassistant
+    volumes:
+      - /mnt/ssd/home-assistant:/config
+    restart: unless-stopped
+    network_mode: host
+
+  zigbee2mqtt:
+    image: koenkk/zigbee2mqtt
+    container_name: zigbee2mqtt
+    volumes:
+      - /mnt/ssd/zigbee2mqtt:/app/data
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+    restart: unless-stopped
+
+  # nginx-proxy:
+  #   image: jc21/nginx-proxy-manager:latest
+  #   container_name: nginx-proxy
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:80"    # HTTP
+  #     - "443:443"  # HTTPS
+  #     - "81:81"    # Pannello Admin di Nginx
+  #   volumes:
+  #     - /mnt/config/nginx/data:/data
+  #     - /mnt/config/nginx/letsencrypt:/etc/letsencrypt
+
+  netdata:
+    image: netdata/netdata
+    container_name: netdata
+    hostname: "raspberry-master"
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+      - NET_ADMIN
+    ports:
+      - 19999:19999
+    volumes:
+      - /mnt/ssd/netdataconfig:/etc/netdata
+      - /mnt/ssd/netdatalib:/var/lib/netdata
+      - /mnt/ssd/netdatacache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+    environment:
+      - NETDATA_REGISTRY=1   # Abilita il registry per raccogliere metriche
+
+  pihole:
+    image: pihole/pihole
+    container_name: pihole
+    restart: unless-stopped
+    #environment:
+      #- WEBPASSWORD=yourpassword   # Cambia la password dell'interfaccia web
+      #- DNS1=8.8.8.8               # DNS primario
+      #- DNS2=8.8.4.4               # DNS secondario
+      #- PIHOLE_DOMAIN=yourdomain.local
+      #- TZ=Europe/Rome
+    volumes:
+      - /mnt/ssd/pihole:/etc/pihole
+      #- dnsmasq_config:/etc/dnsmasq.d
+    ports:
+      - "53:53/tcp"      # DNS TCP
+      - "53:53/udp"      # DNS UDP
+      - "80:80"          # Interfaccia web
+    cap_add:
+      - NET_ADMIN
+
+# volumes:
+#   netdataconfig:
+#   netdatalib:
+#   netdatacache:
+#   pihole_config:
+#   dnsmasq_config:
+

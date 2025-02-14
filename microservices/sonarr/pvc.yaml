@@ -1,31 +1,29 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: "qbittorrent-config"
+  name: "sonarr-config"
   labels:
     type: "local"
 spec:
   storageClassName: "manual"
   capacity:
-    storage: "600Mi"
+    storage: "200Mi"
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/ssd/qbittorrent-config"
+    path: "/mnt/ssd/sonarr"
 
 ---
 
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  labels:
-    app: qbittorrent
-  name: "qbittorrent-config"
+  name: sonarr-config
+  namespace: default
 spec:
-  storageClassName: "manual"
-  volumeName: qbittorrent-config
+  volumeName: sonarr-config
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 200Mi
+      storage: "200Mi"
