@@ -29,37 +29,3 @@ spec:
   resources:
     requests:
       storage: 200Mi
-
----
-
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: "plex-data"
-  labels:
-    type: "local"
-spec:
-  storageClassName: "manual"
-  capacity:
-    storage: "1000Gi"
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/dock2"
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  labels:
-    app: plex
-  name: "plex-data"
-spec:
-  storageClassName: "manual"
-  volumeName: plex-data
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1000Gi

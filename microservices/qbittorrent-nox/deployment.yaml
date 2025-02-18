@@ -13,6 +13,15 @@ spec:
       labels:
         app: qbittorrent
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - raspberrypi-worker-1
       containers:
         - name: qbittorrent
           image: qbittorrentofficial/qbittorrent-nox:5.0.3-1
@@ -32,7 +41,7 @@ spec:
               mountPath: /downloads
           env:
             - name: QBT_WEBUI_PORT
-              value: "30413"
+              value: "30202"
             - name: UMASK
               value: "002"
             - name: PUID
@@ -44,8 +53,8 @@ spec:
           persistentVolumeClaim:
             claimName: qbittorrent-config
         - name: downloads
-          persistentVolumeClaim:
-            claimName: plex-data
+          hostPath:
+            path: /mnt/dock2/Downloads
 
 ---
 
@@ -60,14 +69,14 @@ spec:
   ports:
     - name: webui
       protocol: TCP
-      port: 30413
-      nodePort: 30413 # this has to match the QBT_WEBUI_PORT env variable
+      port: 30202
+      nodePort: 30202 # this has to match the QBT_WEBUI_PORT env variable
     - name: bittorrent-tcp
       protocol: TCP
       port: 6881
-      nodePort: 30423
+      nodePort: 30298
     - name: bittorrent-udp
       protocol: UDP
       port: 6881
-      nodePort: 30433
+      nodePort: 30299
   type: NodePort

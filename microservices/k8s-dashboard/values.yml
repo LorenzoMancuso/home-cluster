@@ -8,3 +8,11 @@ tolerations:
 #    operator: "Equal|Exists"
 #    value: "value"
 #    effect: "NoSchedule|PreferNoSchedule|NoExecute"
+
+web:
+  service:
+    type: NodePort
+    ports:
+    - port: 443
+      targetPort: 443
+      nodePort: 30001

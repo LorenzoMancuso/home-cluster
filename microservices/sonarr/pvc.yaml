@@ -5,7 +5,7 @@ metadata:
   labels:
     type: "local"
 spec:
-  storageClassName: "manual"
+  storageClassName: "local-path"  
   capacity:
     storage: "200Mi"
   accessModes:
@@ -21,6 +21,7 @@ metadata:
   name: sonarr-config
   namespace: default
 spec:
+  storageClassName: "local-path"
   volumeName: sonarr-config
   accessModes:
     - ReadWriteOnce

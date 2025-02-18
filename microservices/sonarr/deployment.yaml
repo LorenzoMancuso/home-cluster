@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+  labels:
+    app: sonarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - raspberrypi-worker-1
+      containers:
+        - name: sonarr
+          image: linuxserver/sonarr:3.0.8.1507-ls151
+          ports:
+            - containerPort: 8989
+          env:
+            - name: PUID
+              value: "1000" # Modifica con l'ID utente corretto
+            - name: PGID
+              value: "1000" # Modifica con l'ID gruppo corretto
+            - name: TZ
+              value: "Europe/Rome"
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: downloads
+              mountPath: /downloads
+            - name: media
+              mountPath: /tv
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: sonarr-config
+        - name: downloads
+          hostPath:
+            path: /mnt/dock2/Downloads  # Modifica con il percorso corretto sul nodo
+            type: Directory
+        - name: media
+          hostPath:
+            path: /mnt/dock2/Serietv-Anime  # Modifica con il percorso corretto sul nodo
+            type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sonarr
+spec:
+  selector:
+    app: sonarr
+  ports:
+    - nodePort: 30203
+      port: 8989
+      targetPort: 8989
+  type: NodePort

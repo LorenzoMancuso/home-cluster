@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+  labels:
+    app: prowlarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - raspberrypi-worker-1
+      containers:
+        - name: prowlarr
+          image: linuxserver/prowlarr:arm32v7-version-1.0.1.2220
+          ports:
+            - containerPort: 8989
+          env:
+            - name: PUID
+              value: "1000" # Modifica con l'ID utente corretto
+            - name: PGID
+              value: "1000" # Modifica con l'ID gruppo corretto
+            - name: TZ
+              value: "Europe/Rome"
+          volumeMounts:
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: prowlarr-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prowlarr
+spec:
+  selector:
+    app: prowlarr
+  ports:
+    - nodePort: 30205
+      port: 9696
+      targetPort: 9696
+  type: NodePort
