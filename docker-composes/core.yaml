@@ -1,0 +1,85 @@
+version: "3.8"
+
+services:
+  homeassistant:
+    image: "ghcr.io/home-assistant/home-assistant:2024.10"
+    container_name: homeassistant
+    volumes:
+      - ${CONFIG_BASE}/home-assistant:/config
+    ports:
+      - "30101:8123/tcp"
+    restart: unless-stopped
+    #network_mode: host
+    
+  # the user has to be in the 'dialout' group
+  zigbee2mqtt:
+    image: koenkk/zigbee2mqtt
+    container_name: zigbee2mqtt
+    volumes:
+      - ${CONFIG_BASE}/zigbee2mqtt:/app/data
+      - /run/udev:/run/udev
+      #- /dev/ttyACM0:/dev/ttyACM0
+    ports:
+      - "30102:8080/tcp"
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+    restart: unless-stopped
+
+
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    container_name: mosquitto
+    volumes:
+      - ${CONFIG_BASE}/mosquitto:/mosquitto
+    ports:
+      - "1883:1883/tcp"
+    restart: unless-stopped
+    
+
+  netdata:
+    image: netdata/netdata  
+    container_name: netdata
+    hostname: "rpi-core"
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+      - NET_ADMIN
+    ports:
+      - 19999:19999
+    volumes:
+      - ${CONFIG_BASE}/netdataconfig:/etc/netdata
+      - ${CONFIG_BASE}/netdatalib:/var/lib/netdata
+      - ${CONFIG_BASE}/netdatacache:/var/cache/netdata
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+    environment:
+      - NETDATA_REGISTRY=1   # Abilita il registry per raccogliere metriche
+
+
+  pihole:
+    image: pihole/pihole
+    container_name: pihole
+    restart: unless-stopped
+    volumes:
+      - ${CONFIG_BASE}/pihole:/etc/pihole
+    ports:
+      - "53:53/tcp"      # DNS TCP
+      - "53:53/udp"      # DNS UDP
+      - "30100:80"          # Interfaccia web
+    cap_add:
+      - NET_ADMIN
+
+    # nginx-proxy:
+    #   image: jc21/nginx-proxy-manager:latest
+    #   container_name: nginx-proxy
+    #   restart: unless-stopped
+    #   ports:
+    #     - "80:80"    # HTTP
+    #     - "443:443"  # HTTPS
+    #     - "81:81"    # Pannello Admin di Nginx
+    #   volumes:
+    #     - /mnt/config/nginx/data:/data
+    #     - /mnt/config/nginx/letsencrypt:/etc/letsencrypt

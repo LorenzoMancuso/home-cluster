@@ -1,44 +1,77 @@
 version: "3"
 services:
-  qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent
-    container_name: qbittorrent
-    volumes:
-      - /mnt/dock2:/downloads
-    ports:
-      - 8080:8080
-    restart: unless-stopped
-
   plex:
     image: lscr.io/linuxserver/plex
     container_name: plex
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - VERSION=docker
+      - PLEX_CLAIM= #optional
     volumes:
-      - /mnt/dock2:/library:ro
+      - ${CONFIG_BASE}/plex:/config
+      - ${VOLUME_BASE}/dock2:/data
     ports:
       - 32400:32400
+    #network_mode: host
+    restart: unless-stopped
+  
+  qbittorrent:
+    image: qbittorrentofficial/qbittorrent-nox:5.0.3-1
+    container_name: qbittorrent
+    environment:
+      - QBT_WEBUI_PORT=30202
+    volumes:
+      - ${CONFIG_BASE}/qbittorrent-config:/config
+      - ${VOLUME_BASE}/dock2/Downloads:/downloads
+    ports:
+      - 30202:30202/tcp
+      - 6881:6881/tcp
+      - 6881:6881/udp
+    restart: unless-stopped
+  
+  sonarr:
+    image: lscr.io/linuxserver/sonarr
+    container_name: sonarr
+    volumes:
+      - ${CONFIG_BASE}/sonarr:/config
+      - ${VOLUME_BASE}/dock2/Serietv-Anime:/tv
+      - ${VOLUME_BASE}/dock2/Downloads:/downloads
+    ports:
+      - 30203:8989
     restart: unless-stopped
 
-  # sonarr:
-  #   image: lscr.io/linuxserver/sonarr
-  #   container_name: sonarr
-  #   volumes:
-  #     - /mnt/media:/library
-  #   ports:
-  #     - 8989:8989
-  #   restart: unless-stopped
+  radarr:
+    image: lscr.io/linuxserver/radarr
+    container_name: radarr
+    volumes:
+      - ${CONFIG_BASE}/radarr:/config
+    ports:
+      - 30204:7878
+    restart: unless-stopped
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr
+    container_name: prowlarr
+    volumes:
+      - ${CONFIG_BASE}/prowlarr:/config
+    ports:
+      - 30205:9696
+    restart: unless-stopped
 
   netdata:
     image: netdata/netdata
     container_name: netdata
-    hostname: "raspberry-collector"
+    hostname: "rpi-media-server"
     restart: unless-stopped
     cap_add:
       - SYS_PTRACE
       - NET_ADMIN
     volumes:
-      - /mnt/ssd/netdataconfig:/etc/netdata
-      - /mnt/ssd/netdatalib:/var/lib/netdata
-      - /mnt/ssd/netdatacache:/var/cache/netdata
+      - ${CONFIG_BASE}/netdataconfig:/etc/netdata
+      - ${CONFIG_BASE}/netdatalib:/var/lib/netdata
+      - ${CONFIG_BASE}/netdatacache:/var/cache/netdata
       - /etc/passwd:/host/etc/passwd:ro
       - /etc/group:/host/etc/group:ro
       - /proc:/host/proc:ro
@@ -46,9 +79,4 @@ services:
       - /etc/os-release:/host/etc/os-release:ro
     environment:
       - NETDATA_CLOUD_REGISTRY=1
-      - NETDATA_REGISTRY_FROM="http://192.168.88.10:19999"  # Indica il master
-
-# volumes:
-#   netdataconfig:
-#   netdatalib:
-#   netdatacache:
+      - NETDATA_REGISTRY_FROM="http://${NETDATA_MASTER}:19999"  # Indica il master
